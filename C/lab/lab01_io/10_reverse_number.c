@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
 	scanf("%d", &number);
 
 	unitPosition = number % 10;
-	tensPosition = (int) (number / 10);
+	tensPosition = number / 10;
 
 	printf("so da dao nguoc la %d%d", unitPosition, tensPosition);
 
