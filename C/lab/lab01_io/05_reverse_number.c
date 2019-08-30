@@ -5,7 +5,7 @@ int main(int argc, char const *argv[])
 {
 	int number;
 	int unitPosition, tensPosition;
-	
+
 	printf("nhap so co 2 chu so can dao nguoc\n");
 	scanf("%d", &number);
 
