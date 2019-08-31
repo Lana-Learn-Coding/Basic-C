@@ -10,7 +10,8 @@ int main(int argc, char const *argv[])
 	printf("cac uoc cua %u la\n", num);
 
 	int i;
-	int divisor_cnt = 0, COL_MAX = 5;
+	int divisor_cnt = 0;
+	const int COL_MAX = 5;
 	for (int i = 1; i <= num; i++) {
 		int is_divisor = num % i == 0;
 

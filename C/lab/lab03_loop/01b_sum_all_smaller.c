@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
 	scanf("%u", &num);
 
 	int i;
-	for (int i = 1; i <= num; i++) {
+	for (int i = 1; i < num; i++) {
 		sum += i;
 	}
 

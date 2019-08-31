@@ -3,8 +3,8 @@
 
 int main(int argc, char const *argv[])
 {
-	int birth_year;
 	char name[20];
+	int birth_year;
 	int current_year = 2019;
 
 	printf("Moi ban nhap ten: ");

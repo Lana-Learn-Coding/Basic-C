@@ -13,17 +13,15 @@ int main(int argc, char const *argv[])
 	is_odd = (num % 2) != 0;
 	is_common_multiple_3and5 = (num % 3) == 0 && (num % 5) == 0;
 
-	if (is_odd) {
+	if (is_odd)
 		printf("day la so le\n");
-	} else {
+	else
 		printf("day la so chan\n");
-	}
 
-	if (is_common_multiple_3and5) {
+	if (is_common_multiple_3and5)
 		printf("chia het cho 3 va 5\n");
-	} else {
+	else
 		printf("khong chia het cho 3 va 5\n");
-	}
 
 	getch();
 	return 0;

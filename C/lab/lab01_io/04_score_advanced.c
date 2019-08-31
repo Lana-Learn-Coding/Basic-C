@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <conio.h>
 
-#define MATH_FACTOR 3
-#define PHYSIC_FACTOR 2
-#define CHEMISTRY_FACTOR 1
-
 int main(int argc, char const *argv[])
 {
+	const int MATH_FACTOR  = 3, PHYSIC_FACTOR = 2, CHEMISTRY_FACTOR = 1;
+	const int average_factor = CHEMISTRY_FACTOR + PHYSIC_FACTOR + MATH_FACTOR;
+
 	float math, physic, chemistry;
 	float average, total;
-	int average_factor = CHEMISTRY_FACTOR + PHYSIC_FACTOR + MATH_FACTOR;
 
 	printf("nhap diem toan\n");
 	scanf("%f", &math);

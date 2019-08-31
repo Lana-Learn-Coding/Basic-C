@@ -5,7 +5,7 @@ int main(int argc, char const *argv[])
 {
 	float radius;
 	float area, capacity;
-	float PI = 3.141593;
+	const float PI = 3.141593;
 
 	printf("nhap ban kinh hinh cau\n");
 	scanf("%f", &radius);
