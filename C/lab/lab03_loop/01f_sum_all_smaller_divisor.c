@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
 		}
 	}
 
-	printf("tong cac uoc le cua %u la %u", num, sum_divisor);
+	printf("tong cac uoc cua %u la %u", num, sum_divisor);
 
 	getch();
 	return 0;
