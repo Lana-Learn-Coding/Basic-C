@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 {
 	float math, physic, chemistry;
 	float average, total;
-	int averageFactor = CHEMISTRY_FACTOR + PHYSIC_FACTOR + MATH_FACTOR;
+	int average_factor = CHEMISTRY_FACTOR + PHYSIC_FACTOR + MATH_FACTOR;
 
 	printf("nhap diem toan\n");
 	scanf("%f", &math);
@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 	scanf("%f", &chemistry);
 
 	total = math + physic + chemistry;
-	average = (math * MATH_FACTOR + physic * PHYSIC_FACTOR + chemistry * CHEMISTRY_FACTOR) / averageFactor;
+	average = (math * MATH_FACTOR + physic * PHYSIC_FACTOR + chemistry * CHEMISTRY_FACTOR) / average_factor;
 
 	printf("tong diem la %.2f \ndiem trung binh la %.2f", total, average);
 
