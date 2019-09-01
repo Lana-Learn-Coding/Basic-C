@@ -3,7 +3,6 @@
 
 int main(int argc, char const *argv[])
 {
-	int i;
 	int even_cnt = 0;
 	const int COL_MAX = 10;
 	for (int i = 2; i <= 100; i++) {
