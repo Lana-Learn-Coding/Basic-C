@@ -15,7 +15,8 @@ int main(int argc, char const *argv[])
 
 	printf("\nbang cuu chuong cua %d la\n", num);
 
-	for (int i = 1; i < 10; i++) {
+	int i;
+	for (i = 1; i < 10; i++) {
 		printf("%d * %d = %d\n", num, i, num * i);
 	}
 

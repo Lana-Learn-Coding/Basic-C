@@ -9,7 +9,8 @@ int main(int argc, char const *argv[])
 	printf("nhap 1 so nguyen duong n\n");
 	scanf("%u", &num);
 
-	for (int i = 1; i < num; i++) {
+	int i;
+	for (i = 1; i < num; i++) {
 		sum += i;
 	}
 
