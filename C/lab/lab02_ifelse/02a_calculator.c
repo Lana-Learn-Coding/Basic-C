@@ -42,7 +42,15 @@ int main(int argc, char const *argv[])
 		printf("%d cong %d bang %d\n", m, n, m + n );
 		break;
 	case DIVISION:
-		printf("%d chia %d bang %.2f\n", m, n, (float)(m / n));
+		/*
+		* If casting the result only (float) (m / n) if n > m gonna return 0.0,
+		* because in that case, we're performing integer division before casting to float,
+		* so we're casting result of the integer division.
+		*
+		* If we want to do floating point division, you need to divide floating point values in the first place.
+		* Prefer denominator over numerator (Why ?) (numerator / denominator)
+		*/
+		printf("%d chia %d bang %.2f\n", m, n, m / (float) n);
 		break;
 	case SUBTRACTION:
 		printf("%d tru %d bang %d\n", m, n, m - n );
