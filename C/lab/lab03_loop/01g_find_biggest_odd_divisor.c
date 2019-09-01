@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 	scanf("%u", &num);
 
 	int i;
-	for (int i = 1; i <= num; i++) {
+	for (i = 1; i <= num; i++) {
 		int is_odd = i % 2 != 0;
 		int is_divisor = num % i == 0;
 
