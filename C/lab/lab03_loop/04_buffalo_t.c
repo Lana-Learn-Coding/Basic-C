@@ -18,19 +18,20 @@ int main(int argc, char const *argv[])
 	*
 	* Old_buffalos must be a multiple of 3.
 	*/
-	const int TOTAL_BUFFALOS = 100, TOTAL_FEEDS = 100;
+	const int TOTAL_BUFFALOS = 100, TOTAL_FEEDS = 300;
 	const int STANDING_EAT = 15, LAYING_EAT = 9, OLD_EAT = 1;
 	int stadings = 0, layings = 0, olds = 0;
 
+	/* TODO refactor this O(n^2) shit */
 	int i;
-	for (i = 0; i <= TOTAL_BUFFALOS; i + 3) {
+	for (i = 0; i <= TOTAL_BUFFALOS; i += 3) {
 		olds = i;
 		int buffalos_without_olds = TOTAL_BUFFALOS - olds;
 
 		int j;
-		for (j = 0; j <= buffalos_without_olds ; i++) {
+		for (j = 0; j <= buffalos_without_olds; j++) {
 			layings = j;
-			stadings = buffalos_without_olds - stadings;
+			stadings = buffalos_without_olds - layings;
 
 			int total_eats = (olds * OLD_EAT) +
 			                 (layings * LAYING_EAT) +
