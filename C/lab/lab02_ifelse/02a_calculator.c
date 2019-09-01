@@ -19,7 +19,20 @@ int main(int argc, char const *argv[])
 	printf("phep nhan: %c\n", MULTIPLICATION);
 	printf("phep cong: %c\n", ADDITION);
 	printf("phep tru: %c\n", SUBTRACTION);
-	scanf("%c", &operator);
+	/*
+	* Notice the space before %c
+	*
+	* 1. ENTER key press generates a \n, which is a vaild input for %c format specifier,
+	* adding a space before %c tells scanf() to ignore all leading whitespace-like inputs,
+	* (including that previously stored \n) and read the first non-whitespace character from stdin.
+	*
+	* 2. As for the case with %d format specifier,
+	* it consumes (and ignores) any leading whitespace-like inputs before scanning for numeric inputs,
+	* so the "%d" case does not suffer any issues.
+	*
+	* Or, you can use fflush(stdin) before scanf() instead
+	*/
+	scanf(" %c", &operator);
 
 	switch (operator) {
 	case MULTIPLICATION:

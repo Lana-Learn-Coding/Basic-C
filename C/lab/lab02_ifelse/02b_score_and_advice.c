@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
 	scanf("%f", &chemistry);
 
 	average = (math + physic + chemistry) / 3;
-	printf("diem trung binh: %d\n", average);
+	printf("diem trung binh: %.2f\n", average);
 
 	if (average <= 5) {
 		printf("xep loai yeu, can co gang\n");
