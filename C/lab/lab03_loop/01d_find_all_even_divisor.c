@@ -9,10 +9,9 @@ int main(int argc, char const *argv[])
 
 	printf("cac uoc chan cua %u la\n", num);
 
-	int i;
 	int divisor_cnt = 0;
 	const int COL_MAX = 5;
-	for (i = 2; i <= num; i++) {
+	for (int i = 2; i <= num; i++) {
 		int is_even = i % 2 == 0;
 		int is_divisor = num % i == 0;
 

@@ -6,7 +6,7 @@ int main(int argc, char const *argv[])
 	int i;
 	int even_cnt = 0;
 	const int COL_MAX = 10;
-	for (i = 2; i <= 100; i++) {
+	for (int i = 2; i <= 100; i++) {
 		int is_even = i % 2 == 0;
 
 		if (is_even) {
