@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
 		            (STANDING_EAT - LAYING_EAT);
 		layings = buffalos_left - standings;
 
-		if ( standings > 0 && layings > 0) {
+		if ( standings >= 0 && layings >= 0) {
 			/*
 			* check the result of standings and layings calculation
 			* by re-calculate the total feed consummation.
