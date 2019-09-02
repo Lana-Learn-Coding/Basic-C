@@ -6,7 +6,7 @@
   [
     {
       "name": "Run",
-      "shell_cmd": "gcc $file_name -o ${file_base_name} && start ${file_base_name}.exe"
+      "shell_cmd": "gcc -std=c90 $file_name -o ${file_base_name} && start ${file_base_name}.exe"
     }
   ]
 }
