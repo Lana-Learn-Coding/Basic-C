@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <conio.h>
+
+int main(int argc, char const *argv[])
+{
+	unsigned int num;
+	unsigned int sum = 0;
+
+	printf("nhap 1 so nguyen duong n\n");
+	scanf("%u", &num);
+
+	int i;
+	for (i = 1; i < num; i++) {
+		sum += i * i;
+	}
+
+	printf("tong binh phuong cac so nho hon %u la %u\n", num, sum);
+
+	getch();
+	return 0;
+}
