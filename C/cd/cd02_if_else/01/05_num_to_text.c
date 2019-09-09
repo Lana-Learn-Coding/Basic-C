@@ -34,7 +34,9 @@ int main(int argc, char const *argv[])
 		int period_len = (len / 3) - 1;
 		int period_factor = floor(pow(DEMICAL_PERIOD, period_len));
 		int period_num = num / period_factor;
+		int period_num_tmp = period_num;
 		int is_hundreds = 1;
+		int is_thousand = 1;
 		/* first iter */
 		if ( i == 0 && period_num <= 100) {
 			is_hundreds = 0;
@@ -96,17 +98,19 @@ int main(int argc, char const *argv[])
 			period_num = period_num % demical_factor;
 		}
 
-		switch (len) {
-		case 3:
-			break;
-		case 6:
-			printf("nghin ");
-			break;
-		case 9:
-			printf("trieu ");
-			break;
-		case 12:
-			printf("ty ");
+		if (period_num_tmp != 0) {
+			switch (len) {
+			case 3:
+				break;
+			case 6:
+				printf("nghin ");
+				break;
+			case 9:
+				printf("trieu ");
+				break;
+			case 12:
+				printf("ty ");
+			}
 		}
 
 		len -= 3;
