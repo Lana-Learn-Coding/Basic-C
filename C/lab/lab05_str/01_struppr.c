@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 	len = strlen(str);
 
 	int i;
-	for (i = 0; i <  len; i++) {
+	for (i = 0; i < len; i++) {
 		str[i] = toupper(str[i]);
 	}
 
