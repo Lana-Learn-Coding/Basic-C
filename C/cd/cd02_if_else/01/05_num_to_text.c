@@ -10,9 +10,23 @@ int main(int argc, char const *argv[])
 	int num;
 	int period_size;
 	int len;
+	int is_negative = 0;
 	int i;
 	printf("nhap so nguyen: ");
 	scanf("%d", &num);
+
+	/*
+	* Calculation only works with
+	* primitive number.
+	* Keep a bool about negative to
+	* cover the case negative later
+	* and convert num to primitive
+	* to fit the calculation.
+	*/
+	if (num < 0) {
+		is_negative = 1;
+		num *= -1;
+	}
 
 	/* find len */
 	int temp = 1;
@@ -30,15 +44,24 @@ int main(int argc, char const *argv[])
 		}
 	}
 
+	if (is_negative) {
+		printf("am ");
+	}
+
 	for (i = 0; len > 0; i++) {
 		int period_len = (len / 3) - 1;
 		int period_factor = floor(pow(DEMICAL_PERIOD, period_len));
 		int period_num = num / period_factor;
+		/*
+		* The period_num will be changed after
+		* for-loop below. so keep a tmp for
+		* after compare.
+		*/
 		int period_num_tmp = period_num;
 		int is_hundreds = 1;
 		int is_thousand = 1;
 		/* first iter */
-		if ( i == 0 && period_num <= 100) {
+		if ( i == 0 && period_num < 100) {
 			is_hundreds = 0;
 		}
 
