@@ -3,12 +3,9 @@
 #include <stdlib.h>
 
 #define PRINT 1
-#define SUM 2
-#define PRINT_CMULTIPLE_3A4 3
-#define FIND_BIGGEST 4
-#define SORT 5
-#define COUNT_NUM_ODD 6
-#define EXIT 7
+#define SORT_BIG_FIRST 2
+#define SORT_SMALL_FIRST 3
+#define EXIT 4
 
 int main(int argc, char const *argv[])
 {
@@ -28,12 +25,9 @@ int main(int argc, char const *argv[])
 	while (1) {
 		do {
 			printf("chon 1 trong cac lua chon sau:\n");
-			printf("%d. in du lieu vua nhap vao mang\n", PRINT);
-			printf("%d. in tong cac phan tu trong mang\n", SUM);
-			printf("%d. in cac phan tu chia het cho 3 va 4\n", PRINT_CMULTIPLE_3A4);
-			printf("%d. tim phan tu lon nhat\n", FIND_BIGGEST);
-			printf("%d. sap xep cac phan tu trong mang\n", SORT);
-			printf("%d. in so phan tu chan va le\n", COUNT_NUM_ODD);
+			printf("%d. in du lieu trong mang\n", PRINT);
+			printf("%d. sap xep tu lon den nho\n", SORT_BIG_FIRST);
+			printf("%d. sap xep tu nho den lon\n", SORT_SMALL_FIRST);
 			printf("%d. thoat\n", EXIT);
 			printf("lua chon cua ban la: ");
 			scanf("%d", &opts);
@@ -53,41 +47,7 @@ int main(int argc, char const *argv[])
 			}
 			break;
 		}
-		case SUM: {
-			int sum = 0;
-			int i;
-			for (i = 0; i < size; i++) {
-				sum += a[i];
-			}
-			printf("tong cac phan tu la: %d", sum);
-			break;
-		}
-		case PRINT_CMULTIPLE_3A4: {
-			printf("cac phan tu chia het cho 3 va 4 la:\n");
-			int i;
-			for (i = 0; i < size; i++) {
-				int num = a[i];
-				if (num % 3 == 0 &&  num % 4 == 0) {
-					printf("%d\t", num);
-				}
-			}
-			break;
-		}
-		case FIND_BIGGEST: {
-			int max;
-			int i;
-			for (i = 0; i < size; i++) {
-				if (i == 0) {
-					max = a[i];
-				}
-				if (max < a[i]) {
-					max = a[i];
-				}
-			}
-			printf("phan tu lon nhat trong mang la: %d\n", max);
-			break;
-		}
-		case SORT: {
+		case SORT_SMALL_FIRST: {
 			/*
 			* buble sort :(
 			* from smallest to biggest
@@ -111,18 +71,28 @@ int main(int argc, char const *argv[])
 			printf("chon %d de xem ket qua\n", PRINT);
 			break;
 		}
-		case COUNT_NUM_ODD: {
-			int odd_cnt = 0, even_cnt = 0;
-			int i;
-			for (i = 0; i < size; i++) {
-				if (i % 2 == 0) {
-					even_cnt++;
-				} else {
-					odd_cnt++;
+		case SORT_BIG_FIRST: {
+			/*
+			* buble sort :(
+			* from biggest to smallest
+			*/
+			int is_sorted;
+			do {
+				is_sorted = 1;
+				int i;
+				for (i = 1; i < size; i++) {
+					int num = a[i];
+					int bigger = a[i - 1];
+					if (num > bigger) {
+						/* swap */
+						a[i - 1] = num;
+						a[i] = bigger;
+						is_sorted = 0;
+					}
 				}
-			}
-			printf("so phan tu le: %d\n", odd_cnt);
-			printf("so phan tu chan: %d\n", even_cnt);
+			} while (!is_sorted);
+			printf("cac phan tu da duoc sap xep tu lon den nho!\n");
+			printf("chon %d de xem ket qua\n", PRINT);
 			break;
 		}
 		case EXIT:
