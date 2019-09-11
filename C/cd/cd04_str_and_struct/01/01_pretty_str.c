@@ -31,7 +31,6 @@ int main(int argc, char const *argv[])
 
 	/* separate upper */
 	for (i = 0; i < count; ++i) {
-
 	}
 
 	printf("chuoi da duoc viet hoa chu cai dau: %s\n", str);
