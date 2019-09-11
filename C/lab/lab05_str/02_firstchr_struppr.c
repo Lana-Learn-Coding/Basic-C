@@ -14,8 +14,8 @@ int main(int argc, char const *argv[])
 	str[0] = toupper(str[0]);
 	int i;
 	for (i = 1; i < len; i++) {
-		char pre_char = str[i - 1];
-		if (pre_char == ' ') {
+		char pre_chr = str[i - 1];
+		if (pre_chr == ' ') {
 			str[i] = toupper(str[i]);
 		}
 	}
