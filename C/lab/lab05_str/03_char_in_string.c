@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 	printf("nhap vao 1 ki tu: ");
 	scanf(" %c", &find);
 
-	char_p = strchar(str, find);
+	char_p = strchr(str, find);
 	while (char_p != NULL) {
 		printf("tim thay %c tai vi tri: %d\n", find, char_p - str);
 		char_p = strchr(char_p + 1, find);
