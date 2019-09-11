@@ -89,7 +89,7 @@ int main(int argc, char const *argv[])
 		case EXIT:
 			exit(0);
 		default:
-			printf("-> chuong chinh co loi, xin sua lai\n");
+			printf("-> chuong chinh co loi, xin thu lai\n");
 		}
 		printf("\n");
 	}
