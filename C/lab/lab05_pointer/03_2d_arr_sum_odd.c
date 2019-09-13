@@ -2,6 +2,7 @@
 #include <conio.h>
 
 void input(int *ptr_arr, int rows, int columns);
+
 int is_odd(int num);
 
 int main(int argc, char const *argv[])

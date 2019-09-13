@@ -3,7 +3,9 @@
 #include <string.h>
 
 void convert_separator_to_space(char str[]);
+
 void add_space_before_uppercase(char str[], int max_sz);
+
 int is_uppercase(char chr);
 
 int main(int argc, char const *argv[])

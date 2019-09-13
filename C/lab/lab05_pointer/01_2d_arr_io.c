@@ -2,6 +2,7 @@
 #include <conio.h>
 
 void input(int *ptr_arr, int rows, int columns);
+
 void print(int *ptr_arr, int rows, int columns);
 
 int main(int argc, char const *argv[])

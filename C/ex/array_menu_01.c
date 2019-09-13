@@ -12,12 +12,19 @@
 #define EXIT 8
 
 void input_array(int arr[], int len);
+
 void print_array(int arr[], int len);
+
 int sum_odd(int arr[], int len);
+
 int sum_even(int arr[], int len);
+
 void print_and_sum_prime(int arr[], int len);
+
 int is_prime(int num);
+
 void sort_sm_bg(int arr[], int len);
+
 void print_bigest_smallest(int arr[], int len);
 
 int main(int argc, char const *argv[])

@@ -2,7 +2,9 @@
 #include <conio.h>
 
 void print_arr(int *p_arr, int size);
+
 void for_each(int *p_arr, int size, void(*p_fun)(int *));
+
 void increase_one(int *num);
 
 int main() {

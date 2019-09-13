@@ -7,9 +7,13 @@
 #define EXIT 3
 
 void input(int *ptr_arr, int size);
+
 void input_2d(int *ptr_arr, int rows, int columns);
+
 void print(int *ptr_arr, int rows, int columns);
+
 void print_prime(int *ptr_arr, int size);
+
 int is_prime(int num);
 
 int main(int argc, char const *argv[])
