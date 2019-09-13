@@ -3,9 +3,7 @@
 
 void input(int *ptr_arr, int rows, int columns);
 
-void print(int *ptr_arr, int rows, int columns);
-
-int sum_boundary(int *ptr_arr, int rows, int columns);
+void draw(int *ptr_arr, int rows, int columns, int is_fill);
 
 void print_sum_diagonal(int *ptr_arr, int rows, int columns);
 
@@ -21,11 +19,11 @@ int main(int argc, char const *argv[])
 	ptr_arr = &a[0][0];
 
 	input(ptr_arr, rows, columns);
-	print(ptr_arr, rows, columns);
-
+	draw(ptr_arr, rows, columns, 0);
+	printf("\n");
+	draw(ptr_arr, rows, columns, 1);
 
 	print_sum_diagonal(ptr_arr, rows, columns);
-	printf("tong cac phan tu o ria ma tran la:  %d\n", sum_boundary(ptr_arr, rows, columns));
 
 	getch();
 	return 0;
@@ -44,25 +42,9 @@ void input(int *ptr_arr, int rows, int columns)
 	}
 }
 
-void print(int *ptr_arr, int rows, int columns)
+void draw(int *ptr_arr, int rows, int columns, int is_fill)
 {
 	int size = rows * columns;
-	int i;
-	printf("\ncac phan tu trong ma tran la: \n");
-	for (i = 0; i < size; i++) {
-		if (i % rows == 0) {
-			printf("\n");
-		}
-		printf("%d\t", *ptr_arr);
-		ptr_arr++;
-	}
-	printf("\n\n");
-}
-
-int sum_boundary(int *ptr_arr, int rows, int columns)
-{
-	int size = rows * columns;
-	int sum_boundary = 0;
 	int i;
 	for (i = 0; i < size; i++) {
 		int row = i / columns;
@@ -71,12 +53,17 @@ int sum_boundary(int *ptr_arr, int rows, int columns)
 		                  col == 0 ||
 		                  row == rows - 1 ||
 		                  col == columns - 1;
-		if (is_boundary) {
-			sum_boundary += *ptr_arr;
+		if (i % rows == 0) {
+			printf("\n");
+		}
+		if (is_fill || is_boundary) {
+			printf("%d\t", *ptr_arr);
+		} else {
+			printf("\t");
 		}
 		ptr_arr++;
 	}
-	return sum_boundary;
+	printf("\n\n");
 }
 
 void print_sum_diagonal(int *ptr_arr, int rows, int columns)

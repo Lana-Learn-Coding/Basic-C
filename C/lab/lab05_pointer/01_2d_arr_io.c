@@ -29,7 +29,7 @@ void input(int *ptr_arr, int rows, int columns)
 	int i;
 	for (i = 0; i < size; i++) {
 		int row = i / rows;
-		int col = i % columns;
+		int col = i % rows;
 		printf("nhap phan tu a[%d][%d]: ", row, col);
 		scanf("%d", ptr_arr);
 		ptr_arr++;
