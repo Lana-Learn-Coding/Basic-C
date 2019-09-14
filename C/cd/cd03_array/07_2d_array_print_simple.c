@@ -4,20 +4,20 @@
 int main(int argc, char const *argv[])
 {
 	int is_square;
-	int rows, columns;
+	int cols, rows;
 	int main_diagonal = 0, sub_diagonal = 0;
 	int row, col;
 	printf("nhap do dai ma tran: ");
-	scanf("%d", &columns);
-	printf("nhap do rong ma tran: ");
 	scanf("%d", &rows);
-	int a[columns][rows];
-	is_square = columns == rows;
+	printf("nhap do rong ma tran: ");
+	scanf("%d", &cols);
+	int a[rows][cols];
+	is_square = rows == cols;
 
 	/* input */
-	for (col = 0; col < columns; col++) {
+	for (col = 0; col < rows; col++) {
 		printf("nhap hang thu %d\n", col + 1);
-		for (row = 0; row < rows; row++) {
+		for (row = 0; row < cols; row++) {
 			printf("nhap phan tu a[%d][%d]: ", col, row);
 			scanf("%d", &a[col][row]);
 		}
@@ -25,8 +25,8 @@ int main(int argc, char const *argv[])
 
 	/* draw */
 	printf("\n");
-	for (col = 0; col < columns; col++) {
-		for (row = 0; row < rows; row++) {
+	for (col = 0; col < rows; col++) {
+		for (row = 0; row < cols; row++) {
 			printf("%d\t", a[col][row]);
 		}
 		printf("\n");
@@ -36,8 +36,8 @@ int main(int argc, char const *argv[])
 	/* calculate diagonal */
 	if (is_square) {
 		int i;
-		for (i = 0; i < rows; i++) {
-			int sub_row = rows - i - 1;
+		for (i = 0; i < cols; i++) {
+			int sub_row = cols - i - 1;
 			main_diagonal += a[i][i];
 			sub_diagonal += a[i][sub_row];
 		}

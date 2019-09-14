@@ -11,19 +11,19 @@ int main(int argc, char const *argv[])
 {
 	int opts;
 	int is_opts_valid;
-	int rows, columns;
+	int cols, rows;
 	int is_square;
 	printf("nhap do dai ma tran: ");
-	scanf("%d", &columns);
-	printf("nhap do rong ma tran: ");
 	scanf("%d", &rows);
-	int a[columns][rows];
-	is_square = rows == columns;
+	printf("nhap do rong ma tran: ");
+	scanf("%d", &cols);
+	int a[rows][cols];
+	is_square = cols == rows;
 
 	int row, col;
-	for (col = 0; col < columns; col++) {
+	for (col = 0; col < rows; col++) {
 		printf("nhap hang thu %d\n", col + 1);
-		for (row = 0; row < rows; row++) {
+		for (row = 0; row < cols; row++) {
 			printf("nhap phan tu a[%d][%d]: ", col, row);
 			scanf("%d", &a[col][row]);
 		}
@@ -54,8 +54,8 @@ int main(int argc, char const *argv[])
 		case PRINT: {
 			printf("cac phan tu trong ma tran la: \n");
 			int row, col;
-			for (col = 0; col < columns; col++) {
-				for (row = 0; row < rows; row++) {
+			for (col = 0; col < rows; col++) {
+				for (row = 0; row < cols; row++) {
 					printf("%d\t", a[col][row]);
 				}
 				printf("\n");
@@ -65,8 +65,8 @@ int main(int argc, char const *argv[])
 		case SUM_DIAGONAL: {
 			int main_diagonal, sub_diagonal;
 			int i;
-			for (i = 0; i < rows; i++) {
-				int sub_row = rows - i - 1;
+			for (i = 0; i < cols; i++) {
+				int sub_row = cols - i - 1;
 				main_diagonal += a[i][i];
 				sub_diagonal += a[i][sub_row];
 			}
@@ -77,12 +77,12 @@ int main(int argc, char const *argv[])
 		case PRINT_BOUNDARY: {
 			printf("cac phan tu o bien ma tran la: \n");
 			int row, col;
-			for (col = 0; col < columns; col++) {
-				for (row = 0; row < rows; row++) {
+			for (col = 0; col < rows; col++) {
+				for (row = 0; row < cols; row++) {
 					int is_boundary = row == 0 ||
 					                  col == 0 ||
-					                  row == rows - 1 ||
-					                  col == columns - 1;
+					                  row == cols - 1 ||
+					                  col == rows - 1;
 					if (is_boundary) {
 						printf("%d\t", a[col][row]);
 					} else {

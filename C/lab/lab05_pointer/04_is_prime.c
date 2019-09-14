@@ -8,9 +8,9 @@
 
 void input(int *ptr_arr, int size);
 
-void input_2d(int *ptr_arr, int rows, int columns);
+void input_2d(int *ptr_arr, int cols, int rows);
 
-void print(int *ptr_arr, int rows, int columns);
+void print(int *ptr_arr, int cols, int rows);
 
 void print_prime(int *ptr_arr, int size);
 
@@ -50,17 +50,17 @@ int main(int argc, char const *argv[])
 		}
 		case ARR_2D: {
 			int *ptr_arr;
-			int rows, columns;
+			int cols, rows;
 			printf("nhap do dai mang: ");
-			scanf("%d", &columns);
-			printf("nhap do rong mang: ");
 			scanf("%d", &rows);
-			int a[columns][rows];
+			printf("nhap do rong mang: ");
+			scanf("%d", &cols);
+			int a[rows][cols];
 			ptr_arr = &a[0][0];
 
-			input_2d(ptr_arr, rows, columns);
-			print(ptr_arr, rows, columns);
-			print_prime(ptr_arr, rows * columns);
+			input_2d(ptr_arr, cols, rows);
+			print(ptr_arr, cols, rows);
+			print_prime(ptr_arr, cols * rows);
 			break;
 		}
 		case EXIT:
@@ -74,13 +74,13 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-void input_2d(int *ptr_arr, int rows, int columns)
+void input_2d(int *ptr_arr, int cols, int rows)
 {
-	int size = rows * columns;
+	int size = cols * rows;
 	int i;
 	for (i = 0; i < size; i++) {
-		int row = i / rows;
-		int col = i % rows;
+		int row = i / cols;
+		int col = i % cols;
 		printf("nhap phan tu a[%d][%d]: ", row, col);
 		scanf("%d", ptr_arr);
 		ptr_arr++;
@@ -98,13 +98,13 @@ void input(int *ptr_arr, int size)
 
 }
 
-void print(int *ptr_arr, int rows, int columns)
+void print(int *ptr_arr, int cols, int rows)
 {
-	int size = rows * columns;
+	int size = cols * rows;
 	int i;
 	printf("\ncac phan tu trong mang la: \n");
 	for (i = 0; i < size; i++) {
-		if (i % rows == 0) {
+		if (i % cols == 0) {
 			printf("\n");
 		}
 		printf("%d\t", *ptr_arr);
