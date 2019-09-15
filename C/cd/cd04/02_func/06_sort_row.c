@@ -21,6 +21,7 @@ int main(int argc, char const *argv[])
 	ptr_arr = &a[0][0];
 
 	input(ptr_arr, cols, rows);
+
 	int i;
 	for (i = 0; i < rows; i++) {
 		sort(ptr_arr + i * cols, cols, 1);

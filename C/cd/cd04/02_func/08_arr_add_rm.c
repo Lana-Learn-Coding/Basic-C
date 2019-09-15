@@ -117,7 +117,8 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-void get_input(int *ptr_arr, int size) {
+void get_input(int *ptr_arr, int size)
+{
 	int i;
 	for (i = 0; i < size; i++) {
 		printf("nhap phan tu %d/%d: ", i, size);
@@ -131,9 +132,7 @@ void print_arr(int *ptr_arr, int size)
 {
 	int i;
 	for (i = 0; i < size; i++) {
-		if (ptr_arr != NULL) {
-			printf("%d ", *ptr_arr);
-		}
+		printf("%d ", *ptr_arr);
 		ptr_arr++;
 	}
 	printf("\n");
