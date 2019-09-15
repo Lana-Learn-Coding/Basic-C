@@ -15,7 +15,7 @@ void print_arr(int *ptr_arr, int size);
 
 void delete(int *ptr_arr, int size, int pos);
 
-void arr_cpy(int *dst, int *src, int size);
+void shift(int *ptr_arr, int size, int pos);
 
 int main(int argc, char const *argv[])
 {
@@ -53,27 +53,51 @@ int main(int argc, char const *argv[])
 		} while (!is_opts_valid);
 
 		int pos = 0;
+		int element;
 		switch (opts) {
 		case ADD:
+			printf("nhap vi tri can them: ");
+			scanf("%d", &pos);
 			if (len >= len_max) {
 				printf("mang da day, chon %d de xoa bot phan tu\n", REMOVE);
 			} else if (pos < 0 || pos >= len_max) {
-				printf("vi tri khong hop le (0-%d)\n", len_max);
+				printf("vi tri khong hop le (0-%d)\n", len_max - 1);
 			} else {
-
+				printf("nhap phan tu can them: ");
+				scanf("%d", &element);
+				if (pos < len) {
+					shift(p, len_max, pos);
+					*(p + pos) = element;
+				} else {
+					printf("them phan tu vao cuoi mang\n");
+					pos = len;
+					*(p + pos) = element;
+				}
+				len++;
+				printf("da them phan tu %d vao vi tri %d\n", element, pos);
+				printf("chon %d de in phan tu trong mang\n", PRINT);
 			}
 			break;
 		case REMOVE:
+			printf("nhap vi tri can xoa: ");
+			scanf("%d", &pos);
 			if (len <= 0) {
 				printf("mang da rong, chon %d de them phan tu\n", ADD);
 			} else if (pos < 0 || pos >= len_max) {
-				printf("vi tri khong hop le (0-%d)\n", len_max);
+				printf("vi tri khong hop le (0-%d)\n", len_max - 1);
 			} else {
-
+				element = *(p + pos);
+				if (pos < len) {
+					delete(p, len, pos);
+					len--;
+				}
+				printf("da xoa phan tu %d tai vi tri %d\n", element, pos);
+				printf("chon %d de in phan tu trong mang\n", PRINT);
 			}
 			break;
 		case REVERT:
 			memcpy(a, a_bak, len_max * sizeof(int));
+			len = len_max;
 			printf("da khoi phuc lai mang ban dau\n");
 			printf("chon %d de in phan tu trong mang\n", PRINT);
 			break;
@@ -96,7 +120,7 @@ int main(int argc, char const *argv[])
 void get_input(int *ptr_arr, int size) {
 	int i;
 	for (i = 0; i < size; i++) {
-		printf("nhap phan tu %d/%d: ", (i + 1), size);
+		printf("nhap phan tu %d/%d: ", i, size);
 		scanf("%d", ptr_arr);
 		ptr_arr++;
 	}
@@ -117,10 +141,30 @@ void print_arr(int *ptr_arr, int size)
 
 void delete(int *ptr_arr, int size, int pos)
 {
-
+	if (pos < size && pos >= 0) {
+		int i = 0;
+		for (i = pos; i < size - 1; i++)
+		{
+			int *ptr_current = ptr_arr + i;
+			int *ptr_nxt = ptr_arr + i + 1;
+			*ptr_current = *ptr_nxt;
+		}
+	}
+	*(ptr_arr + (size - 1)) = 0;
 }
 
-void add(int *ptr_arr, int size, int pos)
+void shift(int *ptr_arr, int size, int pos)
 {
-
+	if (pos < size && pos >= 0) {
+		int tmp = *(ptr_arr + pos);
+		int i = 0;
+		for (i = pos + 1; i < size; i++)
+		{
+			int *ptr_current = ptr_arr + i;
+			int current = *ptr_current;
+			*ptr_current = tmp;
+			tmp = current;
+		}
+	}
+	*(ptr_arr + pos) = 0;
 }
