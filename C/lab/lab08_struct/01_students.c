@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 	scanf("%s", &student.code);
 	fflush(stdin);
 	printf("nhap ten hoc sinh (toi da 50 ki tu): ");
-	gets(&student.name);
+	gets(&student.name[0]);
 	fflush(stdin);
 	printf("nhap diem toan: ");
 	scanf("%d", &student.maths);
