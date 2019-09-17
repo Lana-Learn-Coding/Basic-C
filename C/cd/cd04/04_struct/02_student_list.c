@@ -7,7 +7,9 @@
 #define PRINT 3
 #define PRINT_BY_GRADE 4
 #define PRINT_HIGHEST 5
-#define EXIT 6
+#define SORT_AVG 6
+#define SORT_NAME 7
+#define EXIT 8
 
 struct subject {
 	char code[6];
@@ -30,6 +32,12 @@ struct student {
 	float average;
 	struct mark marks;
 };
+
+void sort_by_average(struct student *ptr_arr, int size);
+
+void sort_by_name(struct student *ptr_arr, int size);
+
+void swap(struct student *a, struct student *b);
 
 void print_by_grade(struct student *ptr_arr, int size, char *grade);
 
@@ -73,6 +81,8 @@ int main(int argc, char const *argv[]) {
 			printf("%d. liet ke sinh vien\n", PRINT);
 			printf("%d. liet ke sinh vien theo loai\n", PRINT_BY_GRADE);
 			printf("%d. tim sinh vien co diem trung binh cao nhat\n", PRINT_HIGHEST);
+			printf("%d. sap xep theo ten (a->z)\n", SORT_NAME);
+			printf("%d. sap xep theo diem trung binh (nho ->lon)\n", SORT_AVG);
 			printf("%d. thoat\n", EXIT);
 			printf("lua chon cua ban la: ");
 			scanf("%d", &opts);
@@ -113,6 +123,16 @@ int main(int argc, char const *argv[]) {
 			}
 			break;
 		}
+		case SORT_AVG:
+			sort_by_average(p, len);
+			printf("da sap xep theo diem trung binh\n");
+			printf("chon %d de in sinh vien trong danh sach\n", PRINT);
+			break;
+		case SORT_NAME:
+			sort_by_name(p, len);
+			printf("da sap xep theo ten\n");
+			printf("chon %d de in sinh vien trong danh sach\n", PRINT);
+			break;
 		case EXIT:
 			exit(0);
 		default:
@@ -120,6 +140,42 @@ int main(int argc, char const *argv[]) {
 		}
 		printf("\n");
 	}
+}
+
+void sort_by_average(struct student *ptr_arr, int size) {
+	int is_sorted;
+	do {
+		is_sorted = 1;
+		int i;
+		for (i = 1; i < size; i++) {
+			struct student *ptr_std = ptr_arr + i;
+			struct student *ptr_pre_std = ptr_arr + i - 1;
+			if (ptr_pre_std->average > ptr_std->average) {
+				swap(ptr_std, ptr_pre_std);
+			}
+		}
+	} while (!is_sorted);
+}
+
+void sort_by_name(struct student *ptr_arr, int size) {
+	int is_sorted;
+	do {
+		is_sorted = 1;
+		int i;
+		for (i = 1; i < size; i++) {
+			struct student *ptr_std = ptr_arr + i;
+			struct student *ptr_pre_std = ptr_arr + i - 1;
+			if (strcmp(ptr_pre_std->name, ptr_std->name) > 0) {
+				swap(ptr_std, ptr_pre_std);
+			}
+		}
+	} while (!is_sorted);
+}
+
+void swap(struct student *a, struct student *b) {
+	struct student tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 void print_by_highest(struct student *ptr_arr, int size) {
