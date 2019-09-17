@@ -31,7 +31,7 @@ struct student get_student()
 {
 	struct student student;
 	printf("nhap ma sinh vien (toi da 5 ki tu): ");
-	scanf("%s", &student.code);
+	scanf("%s", &student.code[0]);
 	fflush(stdin);
 	printf("nhap ten sinh vien (toi da 50 ki tu): ");
 	gets(&student.name[0]);
