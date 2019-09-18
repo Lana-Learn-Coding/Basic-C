@@ -82,8 +82,7 @@ int main(int argc, char const *argv[])
 			scanf("%d", &pos);
 			if (pos >= 0 && pos < max_len) {
 				printf("nhap thong tin: \n");
-				struct book book = get_book();
-				books[i] = book;
+				books[pos] = get_book();
 				printf("da sua thong tin sach %d", pos);
 			} else {
 				printf("vi tri %d khong hop le", pos);
@@ -91,15 +90,15 @@ int main(int argc, char const *argv[])
 			break;
 		}
 		case SAVE: {
-			char path[] = ".\\books";
+			char path[] = ".\\books.txt";
 			FILE *fp = fopen(path, "w");
 			int i;
 			for (i = 0; i < max_len; i++) {
-				fprintf(fp, "%d. ten sach: %s - ", i + 1, books[i].name);
-				fprintf(fp, "tac gia: %s - ", books[i].author);
-				fprintf(fp, "xuat ban: %s -", books[i].publisher);
-				fprintf(fp, "nam: %d -", books[i].year);
-				fprintf(fp, "gia: %.2f\n", books[i].price);
+				fprintf(fp, "%d. ten sach: %s", i + 1, books[i].name);
+				fprintf(fp, "    tac gia: %s", books[i].author);
+				fprintf(fp, "    xuat ban: %s", books[i].publisher);
+				fprintf(fp, "    nam: %d\n", books[i].year);
+				fprintf(fp, "    gia: %.2f\n\n", books[i].price);
 			}
 			fflush(fp);
 			fclose(fp);
@@ -111,7 +110,7 @@ int main(int argc, char const *argv[])
 		default:
 			printf("chuong chinh co loi, xin thu lai\n");
 		}
-		printf("\n");
+		printf("\n\n");
 	}
 
 	return 0;
