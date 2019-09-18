@@ -16,15 +16,8 @@
 struct subject {
 	char code[6];
 	char name[31];
-	float credit;
+	int credit;
 	float value;
-};
-
-struct mark {
-	struct subject math_a1;
-	struct subject math_a2;
-	struct subject physics;
-	struct subject english;
 };
 
 struct student {
@@ -32,13 +25,13 @@ struct student {
 	char name[31];
 	char grade[31];
 	float average;
-	struct mark marks;
+	struct subject subjects[5];
+	int subject_cnt;
 };
 
 void print_by_code(struct student *ptr_arr, int size, char *code);
 void print_by_name(struct student *ptr_arr, int size, char *name);
 void print_by_grade(struct student *ptr_arr, int size, char *grade);
-int is_str_equals(char *str1, char *str2);
 void print_by_highest(struct student *ptr_arr, int size);
 void print_student(struct student student);
 
@@ -52,11 +45,13 @@ int delete_student(struct student *ptr_arr, int len_max, int len);
 void delete(struct student *ptr_arr, int size, int pos);
 
 struct student get_student();
-struct mark get_mark();
-float get_average(struct mark mark);
+void get_subjects(struct subject *subject, int size);
+struct subject get_subject();
+float get_average(struct subject *subject, int size);
 void grading(float average, char *grade);
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const *argv[])
+{
 	struct student *p;
 	int len = 0, len_max;
 	int opts;
@@ -153,52 +148,40 @@ int main(int argc, char const *argv[]) {
 	}
 }
 
-void print_by_code(struct student *ptr_arr, int size, char *code) {
+void print_by_code(struct student *ptr_arr, int size, char *code)
+{
 	int i = 0;
 	for (i = 0; i < size; i++) {
 		struct student student = *(ptr_arr + i);
-		if (is_str_equals(student.code, code)) {
+		if (strcmp(student.code, code) == 0) {
 			print_student(student);
 		}
 	}
 }
-void print_by_name(struct student *ptr_arr, int size, char *name) {
+void print_by_name(struct student *ptr_arr, int size, char *name)
+{
 	int i = 0;
 	for (i = 0; i < size; i++) {
 		struct student student = *(ptr_arr + i);
-		if (is_str_equals(student.name, name)) {
-			print_student(student);
-		}
-	}
-}
-
-void print_by_grade(struct student *ptr_arr, int size, char *grade) {
-	int i = 0;
-	for (i = 0; i < size; i++) {
-		struct student student = *(ptr_arr + i);
-		if (is_str_equals(student.grade, grade)) {
+		if (strcmp(student.name, name) == 0) {
 			print_student(student);
 		}
 	}
 }
 
-int is_str_equals(char *str1, char *str2) {
-	int len = strlen(str1);
-	if (len == strlen(str2)) {
-		int i;
-		for (i = 0; i < len; i++) {
-			char c1 = *(str1 + i);
-			char c2 = *(str2 + i);
-			if (c1 != c2) {
-				return 0;
-			}
+void print_by_grade(struct student *ptr_arr, int size, char *grade)
+{
+	int i = 0;
+	for (i = 0; i < size; i++) {
+		struct student student = *(ptr_arr + i);
+		if (strcmp(student.grade, grade) == 0) {
+			print_student(student);
 		}
-		return 1;
 	}
-	return 0;
 }
 
-void print_by_highest(struct student *ptr_arr, int size) {
+void print_by_highest(struct student *ptr_arr, int size)
+{
 	float highest = 0;
 	int i = 0;
 	for (i = 0; i < size; i++) {
@@ -215,17 +198,25 @@ void print_by_highest(struct student *ptr_arr, int size) {
 	}
 }
 
-void print_student(struct student student) {
+void print_student(struct student student)
+{
 	printf("[%s] %s:\n", student.code, student.name);
-	printf("%s: %.2f - ", student.marks.math_a1.name, student.marks.math_a1.value);
-	printf("%s: %.2f\n", student.marks.math_a2.name, student.marks.math_a2.value);
-	printf("%s: %.2f - ", student.marks.physics.name, student.marks.physics.value);
-	printf("%s: %.2f\n", student.marks.english.name, student.marks.english.value);
+	int i;
+	for (i = 0; i < student.subject_cnt; i++) {
+		struct subject subject = student.subjects[i];
+		printf("%s: %.2f", subject.name, subject.value);
+		if (i % 2 == 0 && i != 0) {
+			printf("\n");
+		} else {
+			printf(" - ");
+		}
+	}
 	printf("diem trung binh: %.2f -> %s\n", student.average, student.grade);
 	printf("\n");
 }
 
-void sort_by_average(struct student *ptr_arr, int size) {
+void sort_by_average(struct student *ptr_arr, int size)
+{
 	int is_sorted;
 	do {
 		is_sorted = 1;
@@ -241,7 +232,8 @@ void sort_by_average(struct student *ptr_arr, int size) {
 	} while (!is_sorted);
 }
 
-void sort_by_name(struct student *ptr_arr, int size) {
+void sort_by_name(struct student *ptr_arr, int size)
+{
 	int is_sorted;
 	do {
 		is_sorted = 1;
@@ -257,13 +249,15 @@ void sort_by_name(struct student *ptr_arr, int size) {
 	} while (!is_sorted);
 }
 
-void swap(struct student *a, struct student *b) {
+void swap(struct student *a, struct student *b)
+{
 	struct student tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-int add_student(struct student *ptr_arr, int len_max, int len) {
+int add_student(struct student *ptr_arr, int len_max, int len)
+{
 	int pos;
 	printf("nhap vi tri can them: ");
 	scanf("%d", &pos);
@@ -288,7 +282,8 @@ int add_student(struct student *ptr_arr, int len_max, int len) {
 	return 0;
 }
 
-void shift(struct student *ptr_arr, int size, int pos) {
+void shift(struct student *ptr_arr, int size, int pos)
+{
 	if (pos < size && pos >= 0) {
 		struct student tmp = *(ptr_arr + pos);
 		int i = 0;
@@ -301,7 +296,8 @@ void shift(struct student *ptr_arr, int size, int pos) {
 	}
 }
 
-int delete_student(struct student *ptr_arr, int len_max, int len) {
+int delete_student(struct student *ptr_arr, int len_max, int len)
+{
 	int pos;
 	printf("nhap vi tri can xoa: ");
 	scanf("%d", &pos);
@@ -321,7 +317,8 @@ int delete_student(struct student *ptr_arr, int len_max, int len) {
 	return 0;
 }
 
-void delete(struct student *ptr_arr, int size, int pos) {
+void delete(struct student *ptr_arr, int size, int pos)
+{
 	if (pos < size && pos >= 0) {
 		int i = 0;
 		for (i = pos; i < size - 1; i++) {
@@ -333,54 +330,66 @@ void delete(struct student *ptr_arr, int size, int pos) {
 }
 
 /* student spec */
-struct student get_student() {
+struct student get_student()
+{
 	struct student student;
 	fflush(stdin);
 	printf("nhap ma sinh vien (toi da 5 ki tu): ");
-	scanf("%s", &student.code[0]);
+	scanf("%5s", &student.code[0]);
 	fflush(stdin);
 	printf("nhap ten sinh vien (toi da 30 ki tu): ");
 	gets(&student.name[0]);
 	fflush(stdin);
 
-	student.marks = get_mark();
-	student.average = get_average(student.marks);
+	student.subject_cnt = 5;
+	get_subjects(&student.subjects[0], student.subject_cnt);
+	student.average = get_average(&student.subjects[0], student.subject_cnt);
 	grading(student.average, student.grade);
 
 	return student;
 }
 
-struct mark get_mark() {
-	struct subject math_a1 = {"m1001", "toan a1", 2};
-	struct subject math_a2 = {"m1002", "toan a2", 2};
-	struct subject physics = {"p1001", "vat ly", 1};
-	struct subject english = {"e1001", "tieng anh", 3};
-	struct mark mark = {math_a1, math_a2, physics, english};
-
-	printf("[%s] nhap diem mon %s: ", mark.math_a1.code, mark.math_a1.name);
-	scanf("%f", &mark.math_a1.value);
-	printf("[%s] nhap diem mon %s: ", mark.math_a2.code, mark.math_a2.name);
-	scanf("%f", &mark.math_a2.value);
-	printf("[%s] nhap diem mon %s: ", mark.physics.code, mark.physics.name);
-	scanf("%f", &mark.physics.value);
-	printf("[%s] nhap diem mon %s: ", mark.english.code, mark.english.name);
-	scanf("%f", &mark.english.value);
-	return mark;
+void get_subjects(struct subject *subject, int size)
+{
+	int i;
+	for (i = 0; i < size; i++) {
+		printf("mon thu %d/%d:\n", i + 1, size);
+		*(subject + i) = get_subject();
+	}
 }
 
-float get_average(struct mark mark) {
-	float avg_factor = mark.math_a1.credit +
-	                   mark.math_a2.credit +
-	                   mark.physics.credit +
-	                   mark.english.credit;
-	return (mark.math_a1.value * mark.math_a1.credit +
-	        mark.math_a2.value * mark.math_a2.credit +
-	        mark.physics.value * mark.physics.credit +
-	        mark.english.value * mark.english.credit) / avg_factor;
-
+struct subject get_subject()
+{
+	struct subject subject;
+	fflush(stdin);
+	printf("nhap ma mon (toi da 5 ki tu): ");
+	scanf("%5s", &subject.code[0]);
+	fflush(stdin);
+	printf("nhap ten mon (toi da 30 ki tu): ");
+	gets(&subject.name[0]);
+	fflush(stdin);
+	printf("nhap so tin chi: ");
+	scanf("%d", &subject.credit);
+	printf("nhap diem mon: ");
+	scanf("%f", &subject.value);
+	return subject;
 }
 
-void grading(float average, char *grade) {
+float get_average(struct subject *subject, int size)
+{
+	float sum = 0;
+	int avg_factor = 0;
+	int i;
+	for (i = 0; i < size; i++) {
+		struct subject current = *(subject + i);
+		avg_factor += current.credit;
+		sum += current.value * (float) current.credit;
+	}
+	return (sum / (float) avg_factor);
+}
+
+void grading(float average, char *grade)
+{
 	if (average < 5) {
 		strcpy(grade, "yeu");
 	} else if (average >= 5 && average < 6.5) {
@@ -391,5 +400,7 @@ void grading(float average, char *grade) {
 		strcpy(grade, "gioi");
 	} else if (average >= 9 && average <= 10) {
 		strcpy(grade, "xuat sac");
+	} else {
+		strcpy(grade, "quai vat");
 	}
 }
