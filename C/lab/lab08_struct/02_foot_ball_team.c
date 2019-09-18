@@ -4,6 +4,7 @@
 
 struct player {
 	char name[31];
+	int number;
 };
 
 struct team {
@@ -40,7 +41,7 @@ int main(int argc, char const *argv[])
 	printf("danh sach cau thu:\n");
 	for (i = 0; i < team.size; i++) {
 		struct player player = team.players[i];
-		printf("%d. %s\n", i + 1, player.name);
+		printf("%d. %s\n", player.number, player.name);
 	}
 
 	getch();
@@ -53,5 +54,8 @@ struct player get_player()
 	fflush(stdin);
 	printf("nhap ten cau thu (toi da 30 ki tu): ");
 	gets(&player.name[0]);
+	fflush(stdin);
+	printf("nhap so ao cau thu: ");
+	scanf("%d", &player.number);
 	return player;
 }

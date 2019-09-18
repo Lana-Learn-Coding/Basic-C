@@ -158,6 +158,7 @@ void print_by_code(struct student *ptr_arr, int size, char *code)
 		}
 	}
 }
+
 void print_by_name(struct student *ptr_arr, int size, char *name)
 {
 	int i = 0;
