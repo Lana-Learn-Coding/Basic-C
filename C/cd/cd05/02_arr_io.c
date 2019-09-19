@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 	int opts;
 	int is_opts_valid;
 	int len_max, len = 0;
-	printf("nhap chieu dai mang: ");
+	printf("nhap chieu dai toi da mang: ");
 	scanf("%d", &len_max);
 	int a[len_max];
 
