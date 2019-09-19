@@ -18,7 +18,7 @@ void get_string(char *str, int num);
 
 int main(int argc, char const *argv[])
 {
-
+	char filename[] = "dat";
 	int len_max, len = 0;
 	printf("nhap chieu dai toi da mang: ");
 	scanf("%d", &len_max);
@@ -26,9 +26,9 @@ int main(int argc, char const *argv[])
 
 	while (1) {
 		/* menu */
+		int opts;
+		int is_opts_valid;
 		do {
-			int opts;
-			int is_opts_valid;
 			printf("chon 1 trong cac lua chon sau:\n");
 			printf("%d. nhap du lieu cho mang\n", INPUT);
 			printf("%d. in ra du lieu trong mang\n", PRINT);
@@ -37,6 +37,7 @@ int main(int argc, char const *argv[])
 			printf("%d. thoat\n", EXIT);
 			printf("lua chon cua ban la: ");
 			scanf("%d", &opts);
+			fflush(stdin);
 			is_opts_valid = opts >= INPUT && opts <= EXIT;
 			if (!is_opts_valid) {
 				printf("lua chon cua ban (%d) khong hop le!\n", opts);
@@ -48,10 +49,21 @@ int main(int argc, char const *argv[])
 			break;
 		case PRINT:
 			break;
-		case READ:
+		case WRITE: {
+			int write = writeb_arr(filename, a, sizeof(int), len);
+			printf("xuat %d phan tu ra file %s\n", write, filename);
 			break;
-		case WRITE:
+		}
+		case READ: {
+			int read = readb_arr(filename, a, sizeof(int), len_max);
+			if (read <= len_max) {
+				len = read;
+				printf("doc %d phan tu tu file %s\n", len, filename);
+			} else {
+				printf("vuot qua gioi han luu tru cua mang (%d/%d)\n", read, len_max);
+			}
 			break;
+		}
 		case EXIT:
 			exit(0);
 		default:
