@@ -18,8 +18,7 @@ void get_string(char *str, int num);
 
 int main(int argc, char const *argv[])
 {
-	int opts;
-	int is_opts_valid;
+
 	int len_max, len = 0;
 	printf("nhap chieu dai toi da mang: ");
 	scanf("%d", &len_max);
@@ -28,6 +27,8 @@ int main(int argc, char const *argv[])
 	while (1) {
 		/* menu */
 		do {
+			int opts;
+			int is_opts_valid;
 			printf("chon 1 trong cac lua chon sau:\n");
 			printf("%d. nhap du lieu cho mang\n", INPUT);
 			printf("%d. in ra du lieu trong mang\n", PRINT);
@@ -36,14 +37,12 @@ int main(int argc, char const *argv[])
 			printf("%d. thoat\n", EXIT);
 			printf("lua chon cua ban la: ");
 			scanf("%d", &opts);
-			printf("\n");
-
 			is_opts_valid = opts >= INPUT && opts <= EXIT;
 			if (!is_opts_valid) {
 				printf("lua chon cua ban (%d) khong hop le!\n", opts);
 			}
+			printf("\n");
 		} while (!is_opts_valid);
-
 
 		switch (opts) {
 		case INPUT:
@@ -64,20 +63,27 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-
-unsigned int readb_arr(const char *filename, void *p_arr, size_t size, size_t count_max) {
-	size_t count;
-	unsigned int result = 0;
-	FILE *fp = fopen(filename, "rb");
-	fread(&count, sizeof(size_t), 1, fp);
-	if (count <= count_max) {
-		result = fread(p_arr, size, count, fp);
+void input_array(int *p_arr, int size)
+{
+	int i;
+	for (i = 0; i < size; ++i) {
+		printf("nhap phan tu thu %d/%d: ", i + 1, size);
+		scanf("%d", (p_arr + i));
 	}
-	fclose(fp);
-	return result;
+	printf("\n");
 }
 
-unsigned int writeb_arr(const char *filename, void *p_arr, size_t size, size_t count) {
+void print_array(int *p_arr, int size)
+{
+	int i;
+	for (i = 0; i < size; ++i) {
+		printf("%d ", *(p_arr + i));
+	}
+	printf("\n");
+}
+
+unsigned int writeb_arr(const char *filename, void *p_arr, size_t size, size_t count)
+{
 	unsigned int result;
 	FILE *fp = fopen(filename, "wb");
 	fwrite(&count, sizeof(size_t), 1, fp);
@@ -87,7 +93,28 @@ unsigned int writeb_arr(const char *filename, void *p_arr, size_t size, size_t c
 	return result;
 }
 
-void get_string(char *str, int num) {
+unsigned int readb_arr(const char *filename, void *p_arr, size_t size, size_t count_max)
+{
+	size_t count;
+	unsigned int result;
+	FILE *fp = fopen(filename, "rb");
+	fread(&count, sizeof(size_t), 1, fp);
+	/*
+	* if count is larger than max,
+	* return the count and not read
+	* anything to avoid buffer overrun
+	*/
+	if (count <= count_max) {
+		result = fread(p_arr, size, count, fp);
+	} else {
+		result = count;
+	}
+	fclose(fp);
+	return result;
+}
+
+void get_string(char *str, int num)
+{
 	char *pos;
 	fgets(str, num, stdin);
 	/* remove newline at the end */

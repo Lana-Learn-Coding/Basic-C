@@ -36,7 +36,6 @@ int main(int argc, char const *argv[])
 			}
 		} while (!is_opts_valid);
 
-
 		switch (opts) {
 		case PRINT:
 			printf("du lieu da nhap: %d\n", num);
