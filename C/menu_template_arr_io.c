@@ -41,7 +41,6 @@ int main(int argc, char const *argv[])
 			if (!is_opts_valid) {
 				printf("lua chon cua ban (%d) khong hop le!\n", opts);
 			}
-			printf("\n");
 		} while (!is_opts_valid);
 
 		switch (opts) {

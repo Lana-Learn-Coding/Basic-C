@@ -16,8 +16,6 @@ void print_array(int *p_arr, int size);
 unsigned int writeb_arr(const char *filename, void *ptr, size_t size, size_t count);
 unsigned int readb_arr(const char *filename, void *ptr, size_t size, size_t count_max);
 
-void get_string(char *str, int num);
-
 int main(int argc, char const *argv[])
 {
 	int len_max, len = 0;
@@ -155,15 +153,4 @@ unsigned int readb_arr(const char *filename, void *p_arr, size_t size, size_t co
 	}
 	fclose(fp);
 	return result;
-}
-
-void get_string(char *str, int num)
-{
-	char *pos;
-	fgets(str, num, stdin);
-	/* remove newline at the end */
-	pos = strchr(str, '\n');
-	if (pos != NULL) {
-		*pos = '\0';
-	}
 }
