@@ -47,12 +47,12 @@ void draw(int *ptr_arr, int cols, int rows, int is_fill)
 	int size = cols * rows;
 	int i;
 	for (i = 0; i < size; i++) {
-		int row = i / rows;
-		int col = i % rows;
+		int row = i / cols;
+		int col = i % cols;
 		int is_boundary = row == 0 ||
 		                  col == 0 ||
-		                  row == cols - 1 ||
-		                  col == rows - 1;
+		                  row == rows - 1 ||
+		                  col == cols - 1;
 		if (i % cols == 0) {
 			printf("\n");
 		}

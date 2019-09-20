@@ -19,12 +19,12 @@ int main(int argc, char const *argv[])
 
 	/* draw */
 	printf("\n");
-	for (col = 0; col < rows; col++) {
-		for (row = 0; row < cols; row++) {
+	for (row = 0; row < rows; row++) {
+		for (col = 0; col < cols; col++) {
 			int is_boundary = row == 0 ||
 			                  col == 0 ||
-			                  row == cols - 1 ||
-			                  col == rows - 1;
+			                  row == rows - 1 ||
+			                  col == cols - 1;
 			if (is_boundary) {
 				printf("%d\t", a[col][row]);
 			} else {
